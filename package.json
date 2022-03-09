@@ -11,9 +11,11 @@
   "private": true,
   "scripts": {
     "lint": "prettier --check .",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "husky": "^7.0.0"
   }
 }
