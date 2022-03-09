@@ -1,0 +1,7 @@
+{
+  "name": "preact-widget-boilerplate",
+  "version": "1.0.0",
+  "description": "A boilerplate for Preact Widgets",
+  "main": "index.ts",
+  "private": true
+}
