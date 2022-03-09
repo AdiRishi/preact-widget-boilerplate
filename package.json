@@ -2,6 +2,18 @@
   "name": "preact-widget-boilerplate",
   "version": "1.0.0",
   "description": "A boilerplate for Preact Widgets",
-  "main": "index.ts",
-  "private": true
+  "author": {
+    "name": "Adishwar Rishi",
+    "email": "adiswa123@gmail.com",
+    "url": "https://github.com/AdiRishi"
+  },
+  "main": "dist/index.js",
+  "private": true,
+  "scripts": {
+    "lint": "prettier --check .",
+    "prettier": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
 }
