@@ -14,6 +14,12 @@ const config: Configuration = {
   devtool: false,
   resolve: {
     extensions: ['.ts', '.tsx'],
+    alias: {
+      react: 'preact/compat',
+      'react-dom/test-utils': 'preact/test-utils',
+      'react-dom': 'preact/compat', // Must be below test-utils
+      'react/jsx-runtime': 'preact/jsx-runtime',
+    },
   },
   plugins: [
     new BundleAnalyzerPlugin({
