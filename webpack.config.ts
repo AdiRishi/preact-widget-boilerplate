@@ -6,7 +6,7 @@ const config: Configuration = {
   entry: path.resolve(__dirname, 'src/index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'widget.js',
+    assetModuleFilename: 'media/images/[hash][ext][query]',
     clean: true,
   },
   mode: 'production',
@@ -28,12 +28,22 @@ const config: Configuration = {
       statsFilename: path.resolve(__dirname, '.webpack/bundleStats.json'),
     }),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      name: false,
+    },
+  },
   module: {
     rules: [
       {
         test: /\.(ts|tsx)$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: [/\.avif$/, /\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        type: 'asset',
       },
     ],
   },
