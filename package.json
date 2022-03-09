@@ -20,7 +20,7 @@
   "scripts": {
     "build": "webpack",
     "analyze": "webpack-bundle-analyzer .webpack/bundleStats.json dist",
-    "lint": "prettier --check .",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx && prettier --check .",
     "prettier": "prettier --write .",
     "prepare": "husky install"
   },
@@ -28,6 +28,10 @@
     "@types/node": "^17.0.21",
     "@types/webpack": "^5.28.0",
     "@types/webpack-bundle-analyzer": "^4.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.5.0",
     "husky": "^7.0.0",
     "prettier": "^2.5.1",
     "ts-loader": "^9.2.7",
