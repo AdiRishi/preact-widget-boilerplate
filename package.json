@@ -7,8 +7,8 @@
     "email": "adiswa123@gmail.com",
     "url": "https://github.com/AdiRishi"
   },
+  "license": "MIT",
   "main": "dist/index.js",
-  "private": true,
   "scripts": {
     "lint": "prettier --check .",
     "prettier": "prettier --write .",
