@@ -1,6 +1,7 @@
 import { Configuration } from 'webpack';
 import path from 'path';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const config: Configuration = {
   entry: path.resolve(__dirname, 'src/index.tsx'),
@@ -8,12 +9,14 @@ const config: Configuration = {
     path: path.resolve(__dirname, 'dist'),
     assetModuleFilename: 'media/images/[hash][ext][query]',
     clean: true,
+    library: 'MyWidget',
+    libraryTarget: 'umd',
   },
   mode: 'production',
   target: 'browserslist',
   devtool: false,
   resolve: {
-    extensions: ['.ts', '.tsx'],
+    extensions: ['.js', '.ts', '.tsx'],
     alias: {
       react: 'preact/compat',
       'react-dom/test-utils': 'preact/test-utils',
@@ -27,6 +30,7 @@ const config: Configuration = {
       generateStatsFile: true,
       statsFilename: path.resolve(__dirname, '.webpack/bundleStats.json'),
     }),
+    new HtmlWebpackPlugin(),
   ],
   optimization: {
     splitChunks: {
