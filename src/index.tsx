@@ -4,10 +4,10 @@ import App from './App';
 const { render } = habitat(App);
 
 render({
-  // selector: '[data-selector="my-widget-container"]',
-  selector: 'body',
+  selector: '[data-selector="my-widget-container"]',
   defaultProps: {
-    showBanner: true,
+    showBanner: false,
+    appTitle: 'Hello Widget Users',
   },
   clean: true,
 });

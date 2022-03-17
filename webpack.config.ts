@@ -37,6 +37,8 @@ const config: Configuration = {
     }),
     new HtmlWebpackPlugin({
       title: 'Widget Test',
+      template: path.resolve(__dirname, 'src/client-template.ejs'),
+      minify: false,
     }),
   ],
   optimization: {
