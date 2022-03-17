@@ -1,15 +1,13 @@
-import { render } from 'preact';
+import habitat from 'preact-habitat';
 import App from './App';
 
-export class MountFunctions {
-  static mountOnDataTarget(htmlSelector: string) {
-    const element = document.querySelector(htmlSelector);
-    if (element) {
-      render(<App showBanner />, element);
-    }
-  }
-}
+const { render } = habitat(App);
 
-document.addEventListener('DOMContentLoaded', function () {
-  MountFunctions.mountOnDataTarget('[data-selector="my-library-target"]');
+render({
+  // selector: '[data-selector="my-widget-container"]',
+  selector: 'body',
+  defaultProps: {
+    showBanner: true,
+  },
+  clean: true,
 });

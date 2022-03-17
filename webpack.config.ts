@@ -3,6 +3,11 @@ import path from 'path';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
+const nodeModulesRegex = /node_modules/;
+const tsRegex = /\.(ts|tsx)$/;
+const imageAssetRegex = /\.(avif|bmp|gif|jpe?g|png)$/;
+const styleSheetRegex = /\.css$/;
+
 const config: Configuration = {
   entry: path.resolve(__dirname, 'src/index.tsx'),
   output: {
@@ -30,7 +35,9 @@ const config: Configuration = {
       generateStatsFile: true,
       statsFilename: path.resolve(__dirname, '.webpack/bundleStats.json'),
     }),
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Widget Test',
+    }),
   ],
   optimization: {
     splitChunks: {
@@ -41,13 +48,30 @@ const config: Configuration = {
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
+        test: tsRegex,
+        exclude: nodeModulesRegex,
         use: 'ts-loader',
-        exclude: /node_modules/,
       },
       {
-        test: [/\.avif$/, /\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        test: imageAssetRegex,
+        exclude: nodeModulesRegex,
         type: 'asset',
+      },
+      {
+        test: styleSheetRegex,
+        exclude: nodeModulesRegex,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [['postcss-preset-env', { stage: 3 }]],
+              },
+            },
+          },
+        ],
       },
     ],
   },
