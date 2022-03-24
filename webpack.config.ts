@@ -2,6 +2,13 @@ import { Configuration } from 'webpack';
 import path from 'path';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+// set NODE_ENV if not specified
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = 'production';
+}
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 const nodeModulesRegex = /node_modules/;
 const tsRegex = /\.(ts|tsx)$/;
@@ -12,12 +19,11 @@ const config: Configuration = {
   entry: path.resolve(__dirname, 'src/index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: 'media/images/[hash][ext][query]',
     clean: true,
     library: 'MyWidget',
     libraryTarget: 'umd',
   },
-  mode: 'production',
+  mode: isDevelopment ? 'development' : 'production',
   target: 'browserslist',
   devtool: false,
   resolve: {
@@ -38,9 +44,9 @@ const config: Configuration = {
     new HtmlWebpackPlugin({
       title: 'Widget Test',
       template: path.resolve(__dirname, 'src/client-template.ejs'),
-      minify: false,
+      minify: !isDevelopment,
     }),
-  ],
+  ].concat(isDevelopment ? [] : [new MiniCssExtractPlugin()]),
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -58,12 +64,15 @@ const config: Configuration = {
         test: imageAssetRegex,
         exclude: nodeModulesRegex,
         type: 'asset',
+        generator: {
+          filename: 'media/images/[hash][ext][query]',
+        },
       },
       {
         test: styleSheetRegex,
         exclude: nodeModulesRegex,
         use: [
-          'style-loader',
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
           { loader: 'css-loader', options: { importLoaders: 1 } },
           {
             loader: 'postcss-loader',

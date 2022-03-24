@@ -18,8 +18,8 @@
     "defaults"
   ],
   "scripts": {
-    "dev": "webpack serve",
-    "build": "webpack",
+    "dev": "webpack serve --node-env development",
+    "build": "webpack --node-env production",
     "analyze": "webpack-bundle-analyzer .webpack/bundleStats.json dist",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx && prettier --check .",
     "prettier": "prettier --write .",
@@ -36,6 +36,7 @@
     "eslint-config-prettier": "^8.5.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
+    "mini-css-extract-plugin": "^2.6.0",
     "postcss": "^8.4.12",
     "postcss-loader": "^6.2.1",
     "postcss-preset-env": "^7.4.3",
