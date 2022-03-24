@@ -25,7 +25,7 @@ const config: Configuration = {
   },
   mode: isDevelopment ? 'development' : 'production',
   target: 'browserslist',
-  devtool: false,
+  devtool: isDevelopment ? 'eval-cheap-module-source-map' : 'source-map',
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
     alias: {
