@@ -6,7 +6,6 @@ interface AppProps {
 }
 
 export default function App(props: AppProps) {
-  console.log(props);
   return (
     <div>
       <h1>{props.appTitle}</h1>
